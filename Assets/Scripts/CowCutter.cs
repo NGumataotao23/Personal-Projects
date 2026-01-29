@@ -6,7 +6,7 @@ using UnityEngine;
 public class CowCutter : MonoBehaviour
 {
 
-
+    //Script to control phase 1 of Cow Cutting
     [SerializeField] public IfInteractable ifInter;
     [SerializeField] public Interactor interactor;
     [SerializeField] MeatCutterCow meat;
@@ -19,7 +19,7 @@ public class CowCutter : MonoBehaviour
 
     [SerializeField] bleeding playBleed;
 
-
+    //trakcs whether the cow has had bleed animation played or not
     public bool isBled = false;
     void Update()
     {
@@ -27,7 +27,8 @@ public class CowCutter : MonoBehaviour
     }
     private void cutcow()
     {
-
+        // Couple of checks to make sure that not only is the object hit interactable via the interactable layer, also checks to make sure the tool is correct
+        //via the number 
         if (interactor.isInteractable)
         {
             if ((ifInter.isHolding == 1) && Input.GetKeyDown(KeyCode.Mouse0))
@@ -53,7 +54,7 @@ public class CowCutter : MonoBehaviour
                             cow2.SetActive(true);
                             break;
                         }
-                        ifInter.disableTool(ifInter.isHolding);
+                        //plays bleed animation if cow has not been bled, otherwise will transition to next stage
                         StartCoroutine(playBleed.PlayBlood(2));
                         Debug.Log("Cow is Bled");
                         isBled = true;
